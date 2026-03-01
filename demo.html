@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YieldFlow - AI-Powered Yield Optimization Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #a855f7;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #252540;
+            --bg-card: #1e1e32;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border-color: #27273a;
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .wallet-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-tertiary);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .wallet-balance {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 16px 32px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-tab {
+            padding: 8px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: all 0.15s;
+        }
+        
+        .nav-tab:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .nav-tab.active {
+            background: var(--primary);
+            color: var(--text-primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .content-panel {
+            display: none;
+        }
+        
+        .content-panel.active {
+            display: block;
+        }
+        
+        /* Dashboard */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 1.75rem;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .metric-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .metric-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .metric-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .metric-trend {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .metric-trend.positive { color: var(--success); }
+        .metric-trend.negative { color: var(--danger); }
+        
+        /* Allocation Section */
+        .allocation-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .allocation-section h2 {
+            margin-bottom: 24px;
+        }
+        
+        .chart-container {
+            display: flex;
+            height: 40px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+        
+        .bar-label {
+            font-size: 0.75rem;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .chart-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        
+        .legend-label {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+        
+        .legend-value {
+            font-weight: 600;
+        }
+        
+        /* Strategy Table */
+        .strategy-details {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .strategy-details h2 {
+            margin-bottom: 24px;
+        }
+        
+        .strategy-table {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .protocol-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .protocol-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .apy-cell {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .risk-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .risk-bar {
+            height: 4px;
+            background: var(--warning);
+            border-radius: 2px;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-badge.active {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--success);
+        }
+        
+        /* Risk Profile Selector */
+        .risk-profile-selector {
+            background: var(--bg-tertiary);
+            padding: 16px;
+            border-radius: var(--border-radius);
+        }
+        
+        .risk-profile-selector h3 {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .profile-options {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .profile-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .profile-option:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .profile-option.active {
+            border-color: var(--primary);
+        }
+        
+        .profile-icon {
+            font-size: 1.5rem;
+        }
+        
+        .profile-name {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        /* AI Insights */
+        .ai-insights {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+        }
+        
+        .ai-insights h2 {
+            margin-bottom: 24px;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .insight-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius);
+        }
+        
+        .insight-icon {
+            font-size: 1.5rem;
+        }
+        
+        .insight-content h4 {
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+        
+        .insight-content p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 32px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        
+        .footer-brand h3 {
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.15s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-disclaimer p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+        
+        /* Deposit/Withdraw Panel */
+        .panel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .panel-card h2 {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .input-group {
+            margin-bottom: 24px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px;
+            padding-right: 80px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+        
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .input-suffix {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        
+        .balance-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .btn-full {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .metric-card, .allocation-section, .strategy-details, .ai-insights, .insight-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .metric-card:nth-child(1) { animation-delay: 0.1s; }
+        .metric-card:nth-child(2) { animation-delay: 0.2s; }
+        .metric-card:nth-child(3) { animation-delay: 0.3s; }
+        .metric-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>YieldFlow</h1>
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">AI-Powered Yield Optimization</span>
+            </div>
+            <div class="header-right">
+                <div class="wallet-info">
+                    <span class="wallet-address">0x7a3d...8f2e</span>
+                    <span class="wallet-balance">10,520.50 USDC</span>
+                </div>
+                <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+            </div>
+        </header>
+        
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="switchTab('deposit')">Deposit</button>
+            <button class="nav-tab" onclick="switchTab('withdraw')">Withdraw</button>
+            <button class="nav-tab" onclick="switchTab('strategies')">Strategies</button>
+            <button class="nav-tab" onclick="switchTab('analytics')">Analytics</button>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Panel -->
+            <div id="dashboard" class="content-panel active">
+                <div class="dashboard-header">
+                    <h1>Portfolio Overview</h1>
+                    <div class="risk-profile-selector">
+                        <h3>Risk Profile</h3>
+                        <div class="profile-options">
+                            <div class="profile-option" onclick="setRiskProfile('conservative')">
+                                <span class="profile-icon">🛡️</span>
+                                <span class="profile-name">Conservative</span>
+                            </div>
+                            <div class="profile-option active" onclick="setRiskProfile('balanced')">
+                                <span class="profile-icon">⚖️</span>
+                                <span class="profile-name">Balanced</span>
+                            </div>
+                            <div class="profile-option" onclick="setRiskProfile('aggressive')">
+                                <span class="profile-icon">🚀</span>
+                                <span class="profile-name">Aggressive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3 class="metric-title">Total Value</h3>
+                        <div class="metric-value" style="color: var(--primary);">$10,520.50</div>
+                        <div class="metric-subtitle">Current portfolio value</div>
+                        <div class="metric-trend positive">+5.20%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">Total Yield</h3>
+                        <div class="metric-value" style="color: var(--success);">$520.50</div>
+                        <div class="metric-subtitle">All-time yield earned</div>
+                        <div class="metric-trend positive">+12.50%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">Current APY</h3>
+                        <div class="metric-value" style="color: var(--secondary);">8.50%</div>
+                        <div class="metric-subtitle">Annual percentage yield</div>
+                        <div class="metric-trend positive">+0.80%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">Daily Earnings</h3>
+                        <div class="metric-value" style="color: var(--warning);">$2.45</div>
+                        <div class="metric-subtitle">Estimated daily yield</div>
+                    </div>
+                </div>
+                
+                <!-- Allocation Section -->
+                <div class="allocation-section">
+                    <h2>Portfolio Allocation</h2>
+                    <div class="chart-container">
+                        <div class="chart-bar" style="width: 35%; background: #6366f1;">
+                            <span class="bar-label">Aave</span>
+                        </div>
+                        <div class="chart-bar" style="width: 25%; background: #8b5cf6;">
+                            <span class="bar-label">Compound</span>
+                        </div>
+                        <div class="chart-bar" style="width: 25%; background: #a855f7;">
+                            <span class="bar-label">Uniswap</span>
+                        </div>
+                        <div class="chart-bar" style="width: 15%; background: #d946ef;">
+                            <span class="bar-label">Curve</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #6366f1;"></span>
+                            <span class="legend-label">Aave V3</span>
+                            <span class="legend-value">35%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #8b5cf6;"></span>
+                            <span class="legend-label">Compound V3</span>
+                            <span class="legend-value">25%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #a855f7;"></span>
+                            <span class="legend-label">Uniswap V3</span>
+                            <span class="legend-value">25%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #d946ef;"></span>
+                            <span class="legend-label">Curve Finance</span>
+                            <span class="legend-value">15%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Strategy Table -->
+                <div class="strategy-details">
+                    <h2>Strategy Performance</h2>
+                    <div class="strategy-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Protocol</th>
+                                    <th>Allocation</th>
+                                    <th>APY</th>
+                                    <th>Risk Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="protocol-cell">
+                                            <span class="protocol-icon">A</span>
+                                            <span>Aave V3</span>
+                                        </div>
+                                    </td>
+                                    <td>35%</td>
+                                    <td class="apy-cell">5.20%</td>
+                                    <td>
+                                        <div class="risk-cell">
+                                            <div class="risk-bar" style="width: 20%;"></div>
+                                            <span>20</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="protocol-cell">
+                                            <span class="protocol-icon">C</span>
+                                            <span>Compound V3</span>
+                                        </div>
+                                    </td>
+                                    <td>25%</td>
+                                    <td class="apy-cell">4.80%</td>
+                                    <td>
+                                        <div class="risk-cell">
+                                            <div class="risk-bar" style="width: 25%;"></div>
+                                            <span>25</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="protocol-cell">
+                                            <span class="protocol-icon">U</span>
+                                            <span>Uniswap V3</span>
+                                        </div>
+                                    </td>
+                                    <td>25%</td>
+                                    <td class="apy-cell">12.50%</td>
+                                    <td>
+                                        <div class="risk-cell">
+                                            <div class="risk-bar" style="width: 45%;"></div>
+                                            <span>45</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="protocol-cell">
+                                            <span class="protocol-icon">C</span>
+                                            <span>Curve Finance</span>
+                                        </div>
+                                    </td>
+                                    <td>15%</td>
+                                    <td class="apy-cell">8.30%</td>
+                                    <td>
+                                        <div class="risk-cell">
+                                            <div class="risk-bar" style="width: 35%;"></div>
+                                            <span>35</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- AI Insights -->
+                <div class="ai-insights">
+                    <h2>AI Insights</h2>
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-icon">📊</div>
+                            <div class="insight-content">
+                                <h4>Market Analysis</h4>
+                                <p>Current DeFi market conditions are favorable for yield farming. TVL across major protocols remains stable.</p>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-icon">⚡</div>
+                            <div class="insight-content">
+                                <h4>Optimization Suggestion</h4>
+                                <p>Consider increasing allocation to Uniswap V3 for higher yield potential based on current market volatility.</p>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-icon">⚠️</div>
+                            <div class="insight-content">
+                                <h4>Risk Alert</h4>
+                                <p>Monitor gas prices before executing rebalance operations. Current gas price is moderate at 15 gwei.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Deposit Panel -->
+            <div id="deposit" class="content-panel">
+                <div class="panel-card">
+                    <h2>Deposit USDC</h2>
+                    <div class="input-group">
+                        <label>Amount to Deposit</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="depositAmount" placeholder="0.00" value="1000">
+                            <span class="input-suffix">USDC</span>
+                        </div>
+                    </div>
+                    <div class="balance-info">
+                        <span>Wallet Balance:</span>
+                        <span>25,000.00 USDC</span>
+                    </div>
+                    <button class="btn btn-full" onclick="deposit()">Deposit & Start Earning</button>
+                </div>
+            </div>
+            
+            <!-- Withdraw Panel -->
+            <div id="withdraw" class="content-panel">
+                <div class="panel-card">
+                    <h2>Withdraw USDC</h2>
+                    <div class="input-group">
+                        <label>Amount to Withdraw</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="withdrawAmount" placeholder="0.00" value="500">
+                            <span class="input-suffix">USDC</span>
+                        </div>
+                    </div>
+                    <div class="balance-info">
+                        <span>Vault Balance:</span>
+                        <span>10,520.50 USDC</span>
+                    </div>
+                    <button class="btn btn-full" onclick="withdraw()">Withdraw Funds</button>
+                </div>
+            </div>
+            
+            <!-- Strategies Panel -->
+            <div id="strategies" class="content-panel">
+                <div class="strategy-details">
+                    <h2>Available Strategies</h2>
+                    <div class="strategy-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Protocol</th>
+                                    <th>Type</th>
+                                    <th>APY</th>
+                                    <th>TVL</th>
+                                    <th>Risk</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div class="protocol-cell"><span class="protocol-icon">A</span><span>Aave V3</span></div></td>
+                                    <td>Lending</td>
+                                    <td class="apy-cell">5.20%</td>
+                                    <td>$500M</td>
+                                    <td><div class="risk-cell"><div class="risk-bar" style="width: 20%;"></div><span>20</span></div></td>
+                                    <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="protocol-cell"><span class="protocol-icon">C</span><span>Compound V3</span></div></td>
+                                    <td>Lending</td>
+                                    <td class="apy-cell">4.80%</td>
+                                    <td>$300M</td>
+                                    <td><div class="risk-cell"><div class="risk-bar" style="width: 25%;"></div><span>25</span></div></td>
+                                    <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="protocol-cell"><span class="protocol-icon">U</span><span>Uniswap V3</span></div></td>
+                                    <td>Liquidity</td>
+                                    <td class="apy-cell">12.50%</td>
+                                    <td>$800M</td>
+                                    <td><div class="risk-cell"><div class="risk-bar" style="width: 45%;"></div><span>45</span></div></td>
+                                    <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="protocol-cell"><span class="protocol-icon">C</span><span>Curve Finance</span></div></td>
+                                    <td>Liquidity</td>
+                                    <td class="apy-cell">8.30%</td>
+                                    <td>$400M</td>
+                                    <td><div class="risk-cell"><div class="risk-bar" style="width: 35%;"></div><span>35</span></div></td>
+                                    <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="protocol-cell"><span class="protocol-icon">L</span><span>Lido Staking</span></div></td>
+                                    <td>Staking</td>
+                                    <td class="apy-cell">4.50%</td>
+                                    <td>$2B</td>
+                                    <td><div class="risk-cell"><div class="risk-bar" style="width: 15%;"></div><span>15</span></div></td>
+                                    <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics Panel -->
+            <div id="analytics" class="content-panel">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3 class="metric-title">7-Day Yield</h3>
+                        <div class="metric-value" style="color: var(--success);">$17.15</div>
+                        <div class="metric-trend positive">+2.3%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">30-Day Yield</h3>
+                        <div class="metric-value" style="color: var(--success);">$73.50</div>
+                        <div class="metric-trend positive">+5.8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">Total Transactions</h3>
+                        <div class="metric-value">24</div>
+                        <div class="metric-subtitle">Deposits & Withdrawals</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 class="metric-title">Gas Saved</h3>
+                        <div class="metric-value" style="color: var(--primary);">$45.20</div>
+                        <div class="metric-subtitle">Through optimization</div>
+                    </div>
+                </div>
+                
+                <div class="ai-insights">
+                    <h2>Performance Analysis</h2>
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-icon">📈</div>
+                            <div class="insight-content">
+                                <h4>Yield Trend</h4>
+                                <p>Your portfolio yield has increased by 5.8% over the last 30 days, outperforming the market average.</p>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-icon">🎯</div>
+                            <div class="insight-content">
+                                <h4>Strategy Efficiency</h4>
+                                <p>Current allocation achieves 92% efficiency score. Consider rebalancing for optimal performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>YieldFlow</h3>
+                    <p>AI-Powered Yield Optimization on Monad</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Documentation</a>
+                    <a href="https://github.com/anbeime/agent-pay" target="_blank">GitHub</a>
+                    <a href="#">Discord</a>
+                </div>
+                <div class="footer-disclaimer">
+                    <p>Disclaimer: DeFi investments carry risks. Past performance does not guarantee future results.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function switchTab(tabName) {
+            // Hide all panels
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected panel
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function setRiskProfile(profile) {
+            document.querySelectorAll('.profile-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // In real app, this would trigger AI rebalancing
+            console.log('Risk profile set to:', profile);
+        }
+        
+        function connectWallet() {
+            alert('Wallet connection initiated. In production, this would open MetaMask or other wallet provider.');
+        }
+        
+        function deposit() {
+            const amount = document.getElementById('depositAmount').value;
+            alert(`Depositing ${amount} USDC. Transaction would be submitted to Monad blockchain.`);
+        }
+        
+        function withdraw() {
+            const amount = document.getElementById('withdrawAmount').value;
+            alert(`Withdrawing ${amount} USDC. Transaction would be submitted to Monad blockchain.`);
+        }
+        
+        // Animate numbers on load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('YieldFlow Demo Loaded');
+        });
+    </script>
+</body>
+</html>
