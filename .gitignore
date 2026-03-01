@@ -43,3 +43,4 @@ typechain-types/
 
 # Remotion
 .remotion/
+.vercel

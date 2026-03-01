@@ -1,0 +1,34 @@
+{
+  "name": "chemistry-courseware",
+  "version": "1.0.0",
+  "description": "化学动态课件 - 基于Remotion的化学教学动画视频",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion render",
+    "upgrade": "remotion upgrade",
+    "render:atomic": "npx remotion render AtomicStructure out/atomic-structure.mp4",
+    "render:bond": "npx remotion render ChemicalBond out/chemical-bond.mp4",
+    "render:reaction": "npx remotion render ChemicalReaction out/chemical-reaction.mp4",
+    "render:all": "npm run render:atomic && npm run render:bond && npm run render:reaction",
+    "test": "eslint src --ext ts,tsx && tsc"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.429",
+    "@remotion/cli": "^4.0.429",
+    "@remotion/eslint-config": "^4.0.429",
+    "@remotion/media": "^4.0.429",
+    "@remotion/transitions": "^4.0.429",
+    "@remotion/zod-types": "^4.0.429",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.429",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/web": "^0.0.143",
+    "eslint": "^8.43.0",
+    "prettier": "^3.0.2",
+    "typescript": "^5.1.6"
+  }
+}
