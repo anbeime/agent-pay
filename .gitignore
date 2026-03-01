@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.pyo
+.pyd
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+.cache/
+.parcel-cache/
+.output/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test
+coverage/
+
+# Artifacts
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Remotion
+.remotion/

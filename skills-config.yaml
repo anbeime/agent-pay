@@ -1,0 +1,588 @@
+# Rebel in Paradise AI Hackathon - 技能配置文件
+# 赛事：Rebel in Paradise AI Hackathon
+# 主办方：Monad Blitz Pro Series
+# 官网：https://rebel.openbuild.xyz/
+# 最后更新：2026-02-17
+
+project:
+  name: "Rebel in Paradise AI Hackathon"
+  track: "AI Hackathon"
+  competition: "Monad Blitz Pro Series"
+  website: "https://rebel.openbuild.xyz/"
+  description: "聚焦Agent-native Payments、Intelligent Markets、Agent-powered Apps三大方向的AI黑客马拉松"
+  organizer: "OpenBuild & Monad"
+  co_host: "SegmentFault, VibeFriends"
+  
+skills:
+  # 系统内置技能
+  builtin:
+    - name: docx
+      description: "Word文档创建与编辑"
+      use_cases:
+        - "项目方案文档"
+        - "技术实现方案"
+        - "商业模式文档"
+        - "项目白皮书"
+      priority: "high"
+      
+    - name: pptx
+      description: "PPT演示文稿创建与编辑"
+      use_cases:
+        - "路演PPT"
+        - "项目展示"
+        - "技术演示"
+      priority: "high"
+      
+    - name: xlsx
+      description: "Excel数据处理与分析"
+      use_cases:
+        - "市场调研数据"
+        - "竞品分析"
+        - "财务预测模型"
+      priority: "medium"
+      
+    - name: python
+      description: "Python代码开发"
+      use_cases:
+        - "智能合约开发"
+        - "Agent应用开发"
+        - "数据分析脚本"
+        - "自动化测试"
+      priority: "high"
+      
+    - name: pdf
+      description: "PDF文档处理"
+      use_cases:
+        - "白皮书生成"
+        - "文档归档"
+      priority: "medium"
+  
+  # 本地技能
+  local:
+    - name: hand-drawn-infographic
+      file: "hand-drawn-infographic.skill"
+      description: "手绘风格信息图生成"
+      use_cases:
+        - "系统架构图"
+        - "流程图"
+        - "产品原型图"
+      priority: "high"
+      
+    - name: business-story-interview
+      file: "business-story-interview.skill"
+      description: "商业故事包装"
+      use_cases:
+        - "项目亮点提炼"
+        - "创新点包装"
+        - "路演故事线设计"
+      priority: "medium"
+
+# 赛事信息
+competition_info:
+  name: "Rebel in Paradise AI Hackathon"
+  subtitle: "AI Hackathon on Monad - where high-performance blockchain meets cutting-edge AI"
+  host: 
+    - name: "OpenBuild"
+      logo: "/home/logo/openbuild_2.png"
+    - name: "Monad"
+      logo: "/home/logo/monad.png"
+  co_host:
+    - name: "SegmentFault"
+      logo: "/home/logo/segmentfault.png"
+    - name: "VibeFriends"
+      logo: "/home/logo/vibefriends.png"
+      
+  schedule:
+    start_date: "2026-01-19"
+    end_date: "2026-02-28"
+    registration_deadline: "2026-02-15 23:59 UTC+8"
+    submission_deadline: "2026-02-28 23:59 UTC+8"
+    hacker_camps:
+      - location: "Beijing"
+        date: "2026-01-31"
+        registration_link: "https://luma.com/irllzbeu"
+      - location: "Shenzhen"
+        date: "2026-02-07"
+        registration_link: "https://luma.com/je6if25j"
+        
+  format: "Hybrid - 1-month mentorship + Beijing/Shenzhen Hacker Camps"
+  expected_submissions: "40-50 projects"
+  winning_teams: "7 teams"
+
+# 赛道配置
+tracks:
+  track1:
+    id: "agent-payments"
+    name: "Agent-native Payments"
+    description: "基于AI Agent的支付解决方案，探索智能体驱动的自动化支付、订阅管理、微支付等创新场景"
+    keywords:
+      - "AI Agent"
+      - "智能支付"
+      - "自动化交易"
+      - "微支付"
+      - "订阅管理"
+    example_projects:
+      - "AI驱动的自动投资组合管理"
+      - "基于Agent的按需付费系统"
+      - "智能合约自动化执行"
+      
+  track2:
+    id: "intelligent-markets"
+    name: "Intelligent Markets"
+    description: "智能市场解决方案，包括预测市场、自动化做市、AI驱动的交易决策等"
+    keywords:
+      - "预测市场"
+      - "自动化做市"
+      - "AI交易"
+      - "市场预测"
+      - "流动性管理"
+    example_projects:
+      - "AI驱动的预测市场平台"
+      - "智能流动性管理协议"
+      - "基于机器学习的交易信号生成"
+      
+  track3:
+    id: "agent-apps"
+    name: "Agent-powered Apps"
+    description: "由AI Agent驱动的创新应用，探索Agent在DeFi、社交、内容创作等领域的应用"
+    keywords:
+      - "AI Agent应用"
+      - "DeFi Agent"
+      - "社交Agent"
+      - "内容创作Agent"
+      - "自动化工作流"
+    example_projects:
+      - "AI投资顾问Agent"
+      - "自动化内容创作平台"
+      - "智能客服与社区管理Agent"
+
+# 技术合作伙伴
+tech_partners:
+  - name: "KIMI"
+    type: "LLM"
+    logo: "/home/logo/technology/kimi.png"
+  - name: "Zhipu"
+    type: "LLM"
+    logo: "/home/logo/technology/zhipu.png"
+  - name: "DouBao"
+    type: "LLM"
+    logo: "/home/logo/technology/doubao.png"
+  - name: "YouWare"
+    type: "Development Platform"
+    logo: "/home/logo/technology/youware.png"
+  - name: "StepFun"
+    type: "AI Platform"
+    logo: "/home/logo/technology/jieyuexc.png"
+  - name: "Rokid"
+    type: "AR/VR"
+    logo: "/home/logo/technology/rokid.png"
+  - name: "SiliconFlow"
+    type: "AI Infrastructure"
+    logo: "/home/logo/technology/guijild.png"
+  - name: "OshwHub"
+    type: "Hardware"
+    logo: "/home/logo/technology/oshwhub.png"
+  - name: "Qiniu"
+    type: "Cloud Storage"
+    logo: "/home/logo/technology/qiniu.png"
+  - name: "Zilliz"
+    type: "Vector Database"
+    logo: "/home/logo/technology/zilliz.png"
+
+# VC合作伙伴
+vc_partners:
+  - name: "Delphi Ventures"
+    logo: "/home/logo/vc/delphi_ventures.png"
+  - name: "Vertex"
+    logo: "/home/logo/vc/vertex.png"
+  - name: "Archetype"
+    logo: "/home/logo/vc/archetype.png"
+  - name: "Pantera"
+    logo: "/home/logo/vc/pantera.png"
+  - name: "CoinFund"
+    logo: "/home/logo/vc/coinfund.svg"
+  - name: "Enlight Capital"
+    logo: "/home/logo/vc/enlightcapital.png"
+  - name: "ZhiYuanCT"
+    logo: "/home/logo/vc/zhiyuanct.png"
+
+# 社区支持
+community_support:
+  - name: "AIGC Open"
+    logo: "/home/logo/community/aigc.png"
+  - name: "AtomGit AI"
+    logo: "/home/logo/community/atom.png"
+  - name: "Bonjour"
+    logo: "/home/logo/community/bonjour.png"
+  - name: "Codatta"
+    logo: "/home/logo/community/codatta.png"
+  - name: "Datawhale"
+    logo: "/home/logo/community/datawhale.png"
+  - name: "Epic"
+    logo: "/home/logo/community/epic.png"
+  - name: "Goplus"
+    logo: "/home/logo/community/goplus.png"
+  - name: "GuiXingRen"
+    logo: "/home/logo/community/guixingren.png"
+  - name: "Hackathon Weekly"
+    logo: "/home/logo/community/hackathon_weekly.png"
+  - name: "杭州AI工坊"
+    logo: "/home/logo/community/ai_gf.png"
+  - name: "RTE"
+    logo: "/home/logo/community/rte.png"
+  - name: "KaiYuanShe"
+    logo: "/home/logo/community/kaiyuanshe.png"
+  - name: "MoonBit"
+    logo: "/home/logo/community/moonbit.png"
+  - name: "PyChina"
+    logo: "/home/logo/community/pychina.png"
+  - name: "WaytoAGI"
+    logo: "/home/logo/community/waytoagi.png"
+
+# 高校社区
+university_community:
+  - name: "北京大学"
+    logo: "/home/logo/community-uni/pku.png"
+  - name: "清华大学"
+    logo: "/home/logo/community-uni/thuba.png"
+  - name: "复旦大学"
+    logo: "/home/logo/community-uni/fudan.png"
+  - name: "浙江大学"
+    logo: "/home/logo/community-uni/zhejiangdx.png"
+  - name: "武汉大学"
+    logo: "/home/logo/community-uni/wuhandx.png"
+
+# 奖金设置
+awards:
+  total_pool: "$40,000 USD"
+  cash_prizes: "$20,000 USD"
+  creative_rewards: "$20,000 USD"
+  
+  grand_prize:
+    rank: "Grand Prize"
+    count: 1
+    amount: "$5,000"
+    description: "从所有获奖项目中选出"
+    
+  track_awards:
+    first_place:
+      count: 3
+      amount_per_team: "$3,000"
+      total: "$9,000"
+      description: "每个赛道1个"
+    second_place:
+      count: 3
+      amount_per_team: "$2,000"
+      total: "$6,000"
+      description: "每个赛道1个"
+      
+  creative_rewards_items:
+    - item: "NVIDIA DGX Spark AI Supercomputer"
+      description: "桌面级AI超级计算机"
+    - item: "Free trial credits"
+      description: "前沿模型、开发者工具和基础设施的免费试用额度"
+    - item: "Top Tech Company Access"
+      description: "包括办公室参观和实习机会"
+
+# 技术栈推荐
+tech_stack:
+  blockchain:
+    name: "Monad Blockchain"
+    description: "高性能区块链平台"
+    features:
+      - "高吞吐量"
+      - "低延迟"
+      - "EVM兼容"
+    resources:
+      - "https://docs.monad.xyz/"
+      
+  ai_frameworks:
+    name: "AI开发框架"
+    frameworks:
+      - name: "LangChain"
+        use: "Agent开发"
+      - name: "AutoGen"
+        use: "多Agent协作"
+      - name: "LlamaIndex"
+        use: "RAG应用"
+      - name: "OpenAI API"
+        use: "大模型调用"
+      - name: "Zhipu API"
+        use: "国产大模型"
+      - name: "KIMI API"
+        use: "长文本处理"
+        
+  smart_contract:
+    name: "智能合约"
+    languages:
+      - "Solidity"
+      - "Vyper"
+    tools:
+      - "Hardhat"
+      - "Foundry"
+      - "Remix"
+      
+  frontend:
+    name: "前端开发"
+    frameworks:
+      - "React"
+      - "Vue.js"
+      - "Next.js"
+    web3:
+      - "wagmi"
+      - "viem"
+      - "ethers.js"
+      - "web3.js"
+
+# 开发测试流程
+development_workflow:
+  phase1:
+    name: "创意构思与团队组建"
+    duration: "1-3天"
+    tasks:
+      - "确定参赛赛道"
+      - "组建团队（1-5人）"
+      - "头脑风暴创意"
+      - "初步技术选型"
+      
+  phase2:
+    name: "方案设计与原型开发"
+    duration: "1-2周"
+    tasks:
+      - "详细方案设计"
+      - "智能合约开发"
+      - "Agent核心逻辑开发"
+      - "前端界面开发"
+      
+  phase3:
+    name: "功能完善与测试"
+    duration: "1周"
+    tasks:
+      - "功能完整性实现"
+      - "智能合约测试"
+      - "Agent行为测试"
+      - "集成测试"
+      
+  phase4:
+    name: "文档编写与演示准备"
+    duration: "3-5天"
+    tasks:
+      - "项目文档编写"
+      - "演示视频录制"
+      - "路演PPT制作"
+      - "最终检查与提交"
+
+# 任务清单
+tasks:
+  - id: 1
+    title: "赛事分析与赛道选择"
+    description: "深入理解Rebel赛事要求，选择适合的赛道方向"
+    status: "pending"
+    priority: "high"
+    estimated_time: "60分钟"
+    deliverables:
+      - "赛道分析报告"
+      - "技术路线规划"
+      
+  - id: 2
+    title: "创意构思与方案设计"
+    description: "构思创新项目方案，设计系统架构"
+    status: "pending"
+    priority: "high"
+    estimated_time: "120分钟"
+    deliverables:
+      - "项目方案文档"
+      - "系统架构图"
+      
+  - id: 3
+    title: "智能合约开发"
+    description: "开发Monad链上智能合约"
+    status: "pending"
+    priority: "high"
+    estimated_time: "180分钟"
+    deliverables:
+      - "智能合约代码"
+      - "合约测试脚本"
+      
+  - id: 4
+    title: "AI Agent开发"
+    description: "开发核心AI Agent逻辑"
+    status: "pending"
+    priority: "high"
+    estimated_time: "240分钟"
+    deliverables:
+      - "Agent核心代码"
+      - "Agent配置文件"
+      
+  - id: 5
+    title: "前端应用开发"
+    description: "开发用户交互界面"
+    status: "pending"
+    priority: "high"
+    estimated_time: "180分钟"
+    deliverables:
+      - "前端应用代码"
+      - "UI组件库"
+      
+  - id: 6
+    title: "集成测试与优化"
+    description: "进行系统集成测试和性能优化"
+    status: "pending"
+    priority: "medium"
+    estimated_time: "120分钟"
+    deliverables:
+      - "测试报告"
+      - "优化记录"
+      
+  - id: 7
+    title: "项目文档编写"
+    description: "编写完整的项目文档"
+    status: "pending"
+    priority: "high"
+    estimated_time: "90分钟"
+    deliverables:
+      - "项目白皮书"
+      - "技术文档"
+      
+  - id: 8
+    title: "演示材料制作"
+    description: "制作路演PPT和演示视频"
+    status: "pending"
+    priority: "high"
+    estimated_time: "120分钟"
+    deliverables:
+      - "路演PPT"
+      - "演示视频"
+      
+  - id: 9
+    title: "成果整理与提交"
+    description: "整理所有成果并准备提交"
+    status: "pending"
+    priority: "high"
+    estimated_time: "60分钟"
+    deliverables:
+      - "提交材料清单"
+      - "项目压缩包"
+
+# 提示词模板
+prompts:
+  project_proposal: |
+    编写Rebel AI Hackathon项目方案文档：
+    1. 项目概述
+       - 项目名称与口号
+       - 选择的赛道方向
+       - 核心创新点
+    2. 问题与机会
+       - 市场痛点分析
+       - 目标用户群体
+       - 市场机会
+    3. 解决方案
+       - 产品功能描述
+       - 技术架构设计
+       - AI Agent设计
+    4. 技术实现
+       - Monad区块链集成
+       - 智能合约设计
+       - Agent技术栈
+    5. 商业模式（如适用）
+    6. 竞争优势
+    7. 团队介绍
+    8. 发展路线图
+    
+    保存到：output/docs/项目方案_Rebel_20260217.docx
+    
+  demo_ppt: |
+    制作Rebel AI Hackathon路演PPT：
+    - 主题：AI + Blockchain创新应用
+    - 风格：科技感+Monad品牌色
+    - 页数：12-15页
+    - 章节：
+      1. 封面（项目名+团队+赛道）
+      2. 问题陈述
+      3. 解决方案概述
+      4. 产品演示
+      5. 技术架构
+      6. AI Agent设计
+      7. 区块链集成
+      8. 市场分析
+      9. 竞争优势
+      10. 团队介绍
+      11. 里程碑与规划
+      12. 结束页
+    
+    保存到：output/ppt/路演PPT_Rebel_20260217.pptx
+    
+  technical_doc: |
+    编写技术实现文档：
+    - 系统架构说明
+    - 智能合约接口文档
+    - AI Agent设计文档
+    - API接口文档
+    - 部署指南
+    - 测试用例
+    
+    保存到：output/docs/技术文档_Rebel_20260217.docx
+
+# 资源链接
+resources:
+  competition:
+    homepage: "https://rebel.openbuild.xyz/"
+    registration: "https://mojo.devnads.com/events/10"
+    
+  monad:
+    docs: "https://docs.monad.xyz/"
+    github: "https://github.com/monad-labs"
+    
+  ai_platforms:
+    kimi: "https://kimi.moonshot.cn/"
+    zhipu: "https://open.bigmodel.cn/"
+    doubao: "https://www.volcengine.com/product/doubao"
+    stepfun: "https://platform.stepfun.com/"
+    
+  development:
+    hardhat: "https://hardhat.org/"
+    foundry: "https://book.getfoundry.sh/"
+    wagmi: "https://wagmi.sh/"
+    viem: "https://viem.sh/"
+
+# 评审标准（预估）
+scoring:
+  dimensions:
+    - name: "技术创新性"
+      weight: "30%"
+      criteria:
+        - "AI Agent创新设计"
+        - "区块链集成创新"
+        - "技术架构先进性"
+    - name: "产品完整性"
+      weight: "25%"
+      criteria:
+        - "功能完整性"
+        - "用户体验"
+        - "代码质量"
+    - name: "商业潜力"
+      weight: "25%"
+      criteria:
+        - "市场机会"
+        - "商业模式"
+        - "竞争优势"
+    - name: "演示效果"
+      weight: "20%"
+      criteria:
+        - "路演表现"
+        - "演示清晰度"
+        - "问题回答"
+
+# Q&A常见问题
+faq:
+  - question: "Can I join this hackathon fully online? Is it okay to skip the offline events?"
+    answer: "Yes."
+    
+  - question: "Are there any requirements to register? (Can I join without a project or idea?)"
+    answer: "There are no requirements for the offline events, but the online hackathon requires a final project submission."
+    
+  - question: "Will applications be reviewed after registering? Is it based on the information submitted?"
+    answer: "Yes, a review is required."
+    
+  - question: "For teams, do we form our own teams or get randomly assigned?"
+    answer: "You form your own team, and you can also recruit teammates in the hackathon community."
